@@ -1,0 +1,19 @@
+{
+  "name": "task-management-app",
+  "version": "1.0.0",
+  "description": "simple task management app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MostafaSaad7/task-management-app.git"
+  },
+  "author": "Omar Gamal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MostafaSaad7/task-management-app/issues"
+  },
+  "homepage": "https://github.com/MostafaSaad7/task-management-app#readme"
+}
