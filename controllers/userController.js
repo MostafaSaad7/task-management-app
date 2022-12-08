@@ -18,5 +18,8 @@ const createUser = catchAsync(async (request, response, next) => {
   });
 });
 const getAllUsers = factory.getAll(User);
+const updateUser = factory.updateOne(User);
+const deleteUser = factory.deleteOne(User);
+const getUser = factory.getOne(User);
 
-module.exports = { createUser, getAllUsers };
+module.exports = { createUser, getAllUsers, getUser, updateUser, deleteUser };
