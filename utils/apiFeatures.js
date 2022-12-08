@@ -1,5 +1,3 @@
-const e = require('express');
-
 class APIFeatures {
   constructor(dbQuery, urlQuery) {
     this.dbQuery = dbQuery;
