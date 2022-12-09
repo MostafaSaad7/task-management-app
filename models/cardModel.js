@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
 
 const subTaskSchema = mongoose.Schema({
   name: {
@@ -31,9 +30,8 @@ const cardSchema = mongoose.Schema({
   },
   dueDate: {
     type: Date,
-    default: Date.now(),
     min: Date.now(),
-    max: Date.now('2100'),
+    max: Date.UTC('2030'),
     validate: {
       validator: function() {
         return this.dueDate >= this.startDate;
