@@ -6,4 +6,10 @@ const factory = require('./handlerFactory');
 const createCard = factory.createOne(Card);
 const getAllCards = factory.getAll(Card);
 const deleteCard = factory.deleteOne(Card);
-module.exports = { createCard, getAllCards, deleteCard };
+const getCard = factory.getOne(Card);
+module.exports = {
+  createCard,
+  getAllCards,
+  deleteCard,
+  getCard
+};
