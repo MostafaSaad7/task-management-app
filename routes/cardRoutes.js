@@ -10,6 +10,7 @@ router
 
 router
   .route('/:id')
+  .patch(cardController.updateCard)
   .delete(cardController.deleteCard)
   .get(cardController.getCard);
 

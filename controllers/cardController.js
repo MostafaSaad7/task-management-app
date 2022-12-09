@@ -7,9 +7,11 @@ const createCard = factory.createOne(Card);
 const getAllCards = factory.getAll(Card);
 const deleteCard = factory.deleteOne(Card);
 const getCard = factory.getOne(Card);
+const updateCard = factory.updateOne(Card);
 module.exports = {
   createCard,
   getAllCards,
   deleteCard,
-  getCard
+  getCard,
+  updateCard
 };
