@@ -4,4 +4,5 @@ const AppError = require('../utils/appError');
 const factory = require('./handlerFactory');
 
 const createCard = factory.createOne(Card);
-module.exports = { createCard };
+const getAllCards = factory.getAll(Card);
+module.exports = { createCard, getAllCards };
