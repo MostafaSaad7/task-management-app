@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
 const subTaskSchema = mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Please provide a Board name']
+    required: [true, 'Please provide a valid subtask name']
   },
   done: {
     type: Boolean,
@@ -14,7 +15,8 @@ const subTaskSchema = mongoose.Schema({
 const cardSchema = mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Please provide a Board name']
+    validate: [validator.isAlpha, 'Please provide a valid card name '],
+    required: [true, 'Please provide a Card name']
   },
   description: {
     type: String,
