@@ -8,4 +8,6 @@ router
   .post(cardController.createCard)
   .get(cardController.getAllCards);
 
+router.route('/:id').delete(cardController.deleteCard);
+
 module.exports = router;
