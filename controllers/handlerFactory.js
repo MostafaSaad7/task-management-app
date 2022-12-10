@@ -5,9 +5,9 @@ const APIFeature = require('../utils/apiFeatures');
 
 exports.deleteOne = Model =>
   catchAsync(async (request, response, next) => {
-    const document = await Model.findOneAndDelete(request.params.id, null);
+    const doc = await Model.findByIdAndDelete(request.params.id);
 
-    if (!document) next(AppError('No document found with this id.', 404));
+    if (!doc) return next(new AppError('No document found with this id.', 404));
 
     response.status(204).json({
       status: 'Success',
@@ -17,7 +17,7 @@ exports.deleteOne = Model =>
 
 exports.updateOne = Model =>
   catchAsync(async (request, response, next) => {
-    const document = await Model.findOneAndUpdate(
+    const document = await Model.findByIdAndUpdate(
       request.params.id,
       request.body,
       {
@@ -25,7 +25,8 @@ exports.updateOne = Model =>
         runValidators: true
       }
     );
-    if (!document) next(AppError('No document found with this id.', 404));
+    if (!document)
+      return next(new AppError('No document found with this id.', 404));
 
     response.status(200).json({
       status: 'Success',
@@ -39,24 +40,25 @@ exports.getOne = (Model, popOptions) =>
   catchAsync(async (request, response, next) => {
     let query = Model.findById(request.params.id);
     if (popOptions) query = query.populate(popOptions);
-    const doc = await query;
-    if (!doc) return next(new AppError('No document found with this id.', 404));
+    const document = await query;
+    if (!document)
+      return next(new AppError('No document found with this id.', 404));
     response.status(200).json({
       status: 'success',
       data: {
-        doc
+        document
       }
     });
   });
 
 exports.createOne = Model =>
   catchAsync(async (request, response, next) => {
-    const Document = await Model.create(request.body);
-    if (!Document) return next(AppError("can't create Document.", 404));
+    const document = await Model.create(request.body);
+    if (!document) return next(new AppError("can't create document.", 404));
     response.status(201).json({
       status: 'success',
       data: {
-        data: Document
+        data: document
       }
     });
   });

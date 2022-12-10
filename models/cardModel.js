@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
 
 const subTaskSchema = mongoose.Schema({
   name: {
@@ -15,7 +14,6 @@ const subTaskSchema = mongoose.Schema({
 const cardSchema = mongoose.Schema({
   name: {
     type: String,
-    validate: [validator.isAlpha, 'Please provide a valid card name '],
     required: [true, 'Please provide a Card name']
   },
   description: {
