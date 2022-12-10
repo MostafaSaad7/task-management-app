@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const userRouter = require('./routes/userRoutes');
 const cardRouter = require('./routes/cardRoutes');
-const columnRouter = require('./routes/coulmnRoutes');
+const columnRouter = require('./routes/columnRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
