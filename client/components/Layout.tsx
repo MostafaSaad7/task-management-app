@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Menu from './Menu';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -16,7 +17,10 @@ const Layout = ({ children, title }: LayoutProps) => {
         />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <div>{children}</div>
+      <div className='flex gap-12'>
+        <Menu />
+        {children}
+      </div>
     </>
   );
 };
