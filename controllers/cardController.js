@@ -82,6 +82,12 @@ const updateSubTask = catchAsync(async (request, response, next) => {
   });
 });
 
+const setColumnId = (req, res, next) => {
+  // Allow nested routes
+  if (!req.body.column) req.body.column = req.params.columnId;
+  next();
+};
+
 const createCard = factory.createOne(Card);
 const getAllCards = factory.getAll(Card);
 const deleteCard = factory.deleteOne(Card);
@@ -97,5 +103,6 @@ module.exports = {
   addSubTask,
   getSubTask,
   deleteSubTask,
-  updateSubTask
+  updateSubTask,
+  setColumnId
 };

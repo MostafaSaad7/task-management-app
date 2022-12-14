@@ -5,13 +5,7 @@ const columnSchema = mongoose.Schema(
     name: {
       type: String,
       required: [true, 'Please provide a Column name']
-    },
-    cards: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Card'
-      }
-    ]
+    }
   },
   {
     toJSON: { virtuals: true },
@@ -19,11 +13,11 @@ const columnSchema = mongoose.Schema(
   }
 );
 
-columnSchema.pre(/^find/, function(next) {
-  this.populate({
-    path: 'cards'
-  });
-  next();
+// Adding virtual field
+columnSchema.virtual('cards', {
+  ref: 'Card',
+  foreignField: 'column',
+  localField: '_id'
 });
 
 const Column = mongoose.model('Column', columnSchema);

@@ -65,12 +65,13 @@ exports.createOne = Model =>
 
 exports.getAll = Model =>
   catchAsync(async (request, response, next) => {
-    const features = new APIFeature(Model.find(), request.query)
+    let filter = {};
+    if (request.params.columnId) filter = { column: request.params.columnId };
+    const features = new APIFeature(Model.find(filter), request.query)
       .filter()
       .sort()
       .limitFields()
       .paginate();
-
     const doc = await features.dbQuery;
     response.status(200).json({
       status: 'success',
