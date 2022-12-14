@@ -39,5 +39,8 @@
   "bugs": {
     "url": "https://github.com/MostafaSaad7/task-management-app/issues"
   },
-  "homepage": "https://github.com/MostafaSaad7/task-management-app#readme"
+  "homepage": "https://github.com/MostafaSaad7/task-management-app#readme",
+  "engines": {
+    "node": "^10"
+  }
 }
