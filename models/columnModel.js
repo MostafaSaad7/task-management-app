@@ -5,6 +5,11 @@ const columnSchema = mongoose.Schema(
     name: {
       type: String,
       required: [true, 'Please provide a Column name']
+    },
+    board: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Board',
+      required: [true, 'Column must belong to a Board']
     }
   },
   {
@@ -12,6 +17,8 @@ const columnSchema = mongoose.Schema(
     toObject: { virtuals: true }
   }
 );
+
+columnSchema.index({ board: 1 });
 
 // Adding virtual field
 columnSchema.virtual('cards', {

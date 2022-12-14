@@ -21,5 +21,12 @@ boardSchema.pre(/^find/, function(next) {
   next();
 });
 
+// Adding virtual field
+boardSchema.virtual('columns', {
+  ref: 'Column',
+  foreignField: 'board',
+  localField: '_id'
+});
+
 const Board = mongoose.model('Board', boardSchema);
 module.exports = Board;
