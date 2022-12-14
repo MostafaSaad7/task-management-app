@@ -93,7 +93,16 @@ const getAllCards = factory.getAll(Card);
 const deleteCard = factory.deleteOne(Card);
 const getCard = factory.getOne(Card);
 const updateCard = factory.updateOne(Card);
-
+const deleteAllCards = catchAsync(async (request, response, next) => {
+  if (!request.params.columnId)
+    return next(new AppError('please provide column id.', 400));
+  const document = await Card.deleteMany({ column: request.params.columnId });
+  if (!document) return next(new AppError('can not find column id.', 404));
+  response.status(204).json({
+    status: 'success',
+    data: null
+  });
+});
 module.exports = {
   createCard,
   getAllCards,
@@ -104,5 +113,6 @@ module.exports = {
   getSubTask,
   deleteSubTask,
   updateSubTask,
-  setColumnId
+  setColumnId,
+  deleteAllCards
 };
