@@ -82,12 +82,26 @@ const updateSubTask = catchAsync(async (request, response, next) => {
   });
 });
 
+const setColumnId = (req, res, next) => {
+  // Allow nested routes
+  if (!req.body.column) req.body.column = req.params.columnId;
+  next();
+};
+
 const createCard = factory.createOne(Card);
 const getAllCards = factory.getAll(Card);
 const deleteCard = factory.deleteOne(Card);
 const getCard = factory.getOne(Card);
 const updateCard = factory.updateOne(Card);
-
+const deleteAllCards = catchAsync(async (request, response, next) => {
+  if (!request.params.columnId)
+    return next(new AppError('please provide column id.', 400));
+  await Card.deleteMany({ column: request.params.columnId });
+  response.status(204).json({
+    status: 'success',
+    data: null
+  });
+});
 module.exports = {
   createCard,
   getAllCards,
@@ -97,5 +111,7 @@ module.exports = {
   addSubTask,
   getSubTask,
   deleteSubTask,
-  updateSubTask
+  updateSubTask,
+  setColumnId,
+  deleteAllCards
 };
