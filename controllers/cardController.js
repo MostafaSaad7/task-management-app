@@ -96,8 +96,7 @@ const updateCard = factory.updateOne(Card);
 const deleteAllCards = catchAsync(async (request, response, next) => {
   if (!request.params.columnId)
     return next(new AppError('please provide column id.', 400));
-  const document = await Card.deleteMany({ column: request.params.columnId });
-  if (!document) return next(new AppError('can not find column id.', 404));
+  await Card.deleteMany({ column: request.params.columnId });
   response.status(204).json({
     status: 'success',
     data: null

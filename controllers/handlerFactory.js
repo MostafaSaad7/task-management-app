@@ -72,12 +72,12 @@ exports.getAll = Model =>
       .sort()
       .limitFields()
       .paginate();
-    const doc = await features.dbQuery;
+    const document = await features.dbQuery;
     response.status(200).json({
       status: 'success',
-      results: doc.length,
+      results: document.length,
       data: {
-        doc
+        document
       }
     });
   });
