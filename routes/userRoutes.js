@@ -1,7 +1,10 @@
 const express = require('express');
 const userController = require('../controllers/userController');
+const boardRouter = require('./boardRoutes');
 
 const router = express.Router();
+router.use('/:userId/boards', boardRouter);
+
 router
   .route('/')
   .post(userController.createUser)

@@ -19,10 +19,17 @@ const deleteBoard = catchAsync(async (request, response, next) => {
   });
 });
 
+const setOwnersMembersId = (request, response, next) => {
+  // Allow nested routes
+  if (!request.body.owners) request.body.owners = [request.params.userId];
+  if (!request.body.members) request.body.members = [request.params.userId];
+  next();
+};
 module.exports = {
   getAllBoards,
   createBoard,
   getBoard,
   updateBoard,
-  deleteBoard
+  deleteBoard,
+  setOwnersMembersId
 };
