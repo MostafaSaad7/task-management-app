@@ -82,9 +82,10 @@ const updateSubTask = catchAsync(async (request, response, next) => {
   });
 });
 
-const setColumnId = (req, res, next) => {
+const setColumnBoardId = (req, res, next) => {
   // Allow nested routes
   if (!req.body.column) req.body.column = req.params.columnId;
+  if (!req.body.board) req.body.board = req.params.boardId;
   next();
 };
 
@@ -112,6 +113,6 @@ module.exports = {
   getSubTask,
   deleteSubTask,
   updateSubTask,
-  setColumnId,
+  setColumnBoardId,
   deleteAllCards
 };

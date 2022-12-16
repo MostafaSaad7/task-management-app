@@ -2,13 +2,13 @@ const express = require('express');
 const columnController = require('../controllers/columnController');
 const cardRouter = require('../routes/cardRoutes');
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 router.use('/:columnId/cards', cardRouter);
 
 router
   .route('/')
   .get(columnController.getAllColumn)
-  .post(columnController.createColumn);
+  .post(columnController.setBoardId, columnController.createColumn);
 
 router
   .route('/:id')

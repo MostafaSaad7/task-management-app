@@ -20,6 +20,6 @@ const createUser = catchAsync(async (request, response, next) => {
 const getAllUsers = factory.getAll(User);
 const updateUser = factory.updateOne(User);
 const deleteUser = factory.deleteOne(User);
-const getUser = factory.getOne(User);
+const getUser = factory.getOne(User, { path: 'boards' });
 
 module.exports = { createUser, getAllUsers, getUser, updateUser, deleteUser };

@@ -5,7 +5,7 @@ const router = express.Router({ mergeParams: true });
 
 router
   .route('/')
-  .post(cardController.setColumnId, cardController.createCard)
+  .post(cardController.setColumnBoardId, cardController.createCard)
   .get(cardController.getAllCards)
   .delete(cardController.deleteAllCards);
 
