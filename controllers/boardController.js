@@ -6,6 +6,8 @@ const AppError = require('../utils/appError');
 const createBoard = factory.createOne(Board);
 const getAllBoards = factory.getAll(Board);
 const getBoard = factory.getOne(Board, { path: 'columns' });
+
+// restrict to owners
 const updateBoard = factory.updateOne(Board);
 const deleteBoard = catchAsync(async (request, response, next) => {
   const document = await Board.deleteOne({ _id: request.params.id });
