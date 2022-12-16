@@ -13,7 +13,21 @@ const boardSchema = mongoose.Schema(
       type: String,
       minlength: 15,
       maxlength: 100
-    }
+    },
+    owners: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        required: [true, 'Board must have owners']
+      }
+    ],
+    members: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        required: [true, 'Board must have members']
+      }
+    ]
   },
   {
     toJSON: { virtuals: true },

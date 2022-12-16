@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const crypto = require('crypto');
+// const bcrypt = require('bcryptjs');
+// const crypto = require('crypto');
 const validator = require('validator');
 
 const userSchema = mongoose.Schema({
@@ -35,6 +35,12 @@ const userSchema = mongoose.Schema({
       message: 'Passwords are not the same'
     }
   },
+  boards: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Board'
+    }
+  ],
   passwordChangedAt: { type: Date },
   passwordResetToken: { type: String },
   passwordResetExpires: { type: Date },
