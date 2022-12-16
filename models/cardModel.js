@@ -44,6 +44,11 @@ const cardSchema = mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: 'Column',
       required: [true, 'Card must belong to a Column']
+    },
+    board: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Board',
+      required: [true, 'Card must belong to a Board']
     }
   },
   {
@@ -53,5 +58,6 @@ const cardSchema = mongoose.Schema(
 );
 
 cardSchema.index({ column: 1 });
+cardSchema.index({ board: 1 });
 const Card = mongoose.model('Card', cardSchema);
 module.exports = Card;

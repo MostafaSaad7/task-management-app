@@ -2,7 +2,12 @@ const Column = require('../models/columnModel');
 const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
 const AppError = require('../utils/appError');
-const cardController = require('./cardController');
+
+const setBoardId = (request, response, next) => {
+  // Allow nested routes
+  if (!request.body.board) request.body.board = request.params.boardId;
+  next();
+};
 
 const getAllColumn = factory.getAll(Column);
 const getColumn = factory.getOne(Column, { path: 'cards' });
@@ -10,11 +15,13 @@ const createColumn = factory.createOne(Column);
 const updateColumn = factory.updateOne(Column);
 
 const deleteColumn = catchAsync(async (request, response, next) => {
-  const document = await Column.findByIdAndDelete(request.params.id);
-  if (!document)
+  const document = await Column.deleteOne({ _id: request.params.id });
+  if (!document.deletedCount)
     return next(new AppError('No document found with this id.', 404));
-  request.params.columnId = request.params.id;
-  cardController.deleteAllCards(request, response, next);
+  response.status(204).json({
+    status: 'success',
+    data: null
+  });
 });
 
 module.exports = {
@@ -22,5 +29,6 @@ module.exports = {
   getColumn,
   createColumn,
   updateColumn,
-  deleteColumn
+  deleteColumn,
+  setBoardId
 };

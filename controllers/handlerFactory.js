@@ -67,6 +67,7 @@ exports.getAll = Model =>
   catchAsync(async (request, response, next) => {
     let filter = {};
     if (request.params.columnId) filter = { column: request.params.columnId };
+    if (request.params.boardId) filter = { board: request.params.boardId };
     const features = new APIFeature(Model.find(filter), request.query)
       .filter()
       .sort()

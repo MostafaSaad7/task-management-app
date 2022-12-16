@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Card = require('./cardModel');
 
 const columnSchema = mongoose.Schema(
   {
@@ -25,6 +26,10 @@ columnSchema.virtual('cards', {
   ref: 'Card',
   foreignField: 'column',
   localField: '_id'
+});
+
+columnSchema.post('remove', async function() {
+  await Card.deleteMany({ column: this._conditions._id });
 });
 
 const Column = mongoose.model('Column', columnSchema);
