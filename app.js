@@ -1,6 +1,5 @@
 const express = require('express');
 
-const app = express();
 const userRouter = require('./routes/userRoutes');
 const cardRouter = require('./routes/cardRoutes');
 const columnRouter = require('./routes/columnRoutes');
@@ -8,6 +7,8 @@ const boardRouter = require('./routes/boardRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
+const app = express();
+app.enable('trust proxy');
 app.use(express.json({ limit: '10kb' }));
 
 app.use('/api/v1/users', userRouter);
