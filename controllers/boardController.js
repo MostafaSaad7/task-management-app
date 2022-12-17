@@ -1,9 +1,10 @@
 const Board = require('../models/boardModel');
+const User = require('../models/userModel');
 const factory = require('./handlerFactory');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
-const createBoard = factory.createOne(Board);
+const createBoard = factory.createOne(Board, User);
 const getAllBoards = factory.getAll(Board);
 const getBoard = factory.getOne(Board, { path: 'columns' });
 
@@ -21,8 +22,10 @@ const deleteBoard = catchAsync(async (request, response, next) => {
 
 const setOwnersMembersId = (request, response, next) => {
   // Allow nested routes
+  console.log(request.params.userId);
   if (!request.body.owners) request.body.owners = [request.params.userId];
   if (!request.body.members) request.body.members = [request.params.userId];
+  request.Board = true;
   next();
 };
 module.exports = {

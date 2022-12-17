@@ -51,10 +51,17 @@ exports.getOne = (Model, popOptions) =>
     });
   });
 
-exports.createOne = Model =>
+exports.createOne = (Model, parent) =>
   catchAsync(async (request, response, next) => {
     const document = await Model.create(request.body);
     if (!document) return next(new AppError("can't create document.", 404));
+    if (request.Board) {
+      await parent.findByIdAndUpdate(request.params.userId, {
+        $push: {
+          boards: document._id
+        }
+      });
+    }
     response.status(201).json({
       status: 'success',
       data: {
